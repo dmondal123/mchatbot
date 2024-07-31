@@ -1,7 +1,6 @@
 from src.helper import load_pdf, text_split, download_hugging_face_embeddings
-from langchain.vectorstores import Pinecone
-from langchain_pinecone import PineconeVectorStore
-from pinecone import Pinecone, ServerlessSpec
+from langchain_community.vectorstores import Pinecone
+from pinecone import Pinecone as pc, ServerlessSpec
 from dotenv import load_dotenv
 import os
 
@@ -19,7 +18,7 @@ embeddings = download_hugging_face_embeddings()
 
 
 #Initializing the Pinecone
-pc = Pinecone()
+pc = pc()
 
 index_name = "medical"
 if index_name not in pc.list_indexes().names():
@@ -37,7 +36,7 @@ if index_name not in pc.list_indexes().names():
 index = pc.Index(index_name)
 
 #Creating Embeddings for Each of The Text Chunks & storing
-docsearch = PineconeVectorStore.from_texts(
+docsearch = Pinecone.from_texts(
     texts=[t.page_content for t in text_chunks],
     embedding=embeddings,
     index_name=index_name

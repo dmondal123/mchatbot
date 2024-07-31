@@ -7,7 +7,7 @@ from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.prompts import PromptTemplate
-from langchain.llms import CTransformers
+from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
 from dotenv import load_dotenv
 from src.prompt import *
